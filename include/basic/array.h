@@ -27,18 +27,18 @@ void basic_array_dealloc(basic_array *array);
 basic_array basic_array_fromblock(basic_block *block, size_t elem_size);
 basic_block basic_array_toblock(basic_array *array);
 
-static inline size_t basic_array_cap(basic_array const *array);
+static inline int basic_array_cap(basic_array const *array);
 
 void *basic_array_at(basic_array *array, int index);
 void const *basic_array_at_c(basic_array const *array, int index);
 
-size_t basic_array_cap(basic_array const *array)
+int basic_array_cap(basic_array const *array)
 {
     BASIC_ASSERT_PTR_NONNULL(array);
     BASIC_ASSERT(basic_array_isinit(array),
             "basic_array object must be initialised");
 
-    return array->data.size / array->elem_size;
+    return (int)(array->data.size / array->elem_size);
 }
 
 bool basic_array_isnull(basic_array const *array)
