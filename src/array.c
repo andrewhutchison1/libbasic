@@ -65,6 +65,8 @@ basic_array *basic_array_realloc(basic_array *array, int elem_count)
 void basic_array_dealloc(basic_array *array)
 {
     BASIC_ASSERT_PTR_NONNULL(array);
+    BASIC_ASSERT(basic_array_isnull(array) || basic_array_isinit(array),
+            "basic_array object must be null or initialised");
 
     if (basic_array_isinit(array)) {
         basic_block_dealloc(&array->data);
@@ -78,8 +80,8 @@ basic_array basic_array_fromblock(basic_block *block, size_t elem_size)
     BASIC_ASSERT_NONZERO(elem_size);
     BASIC_ASSERT(basic_block_isnull(block) || basic_block_isinit(block),
             "basic_block object must be null or initialised");
-    BASIC_ASSERT(basic_block_isnull(block) || elem_size < block->size,
-            "elem_size (%zu) must be less than block->size (%zu)",
+    BASIC_ASSERT(basic_block_isnull(block) || elem_size <= block->size,
+            "elem_size (%zu) must be less than or equal to block->size (%zu)",
             elem_size, block->size);
 
     if (basic_block_isnull(block)) {
