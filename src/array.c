@@ -1,6 +1,8 @@
 #include "array.h"
 
+#ifdef BASIC_DEBUG
 static int valid_index(basic_array const *array, int index);
+#endif
 
 basic_array basic_array_move(basic_array *array)
 {
@@ -114,7 +116,7 @@ void *basic_array_at(basic_array *array, int index)
     BASIC_ASSERT_PTR_NONNULL(array);
     BASIC_ASSERT(basic_array_isinit(array),
             "basic_array object must be initialised");
-    BASIC_ASSERT(valid_index(array, index), "index %d is invalid");
+    BASIC_ASSERT(valid_index(array, index), "index %d is invalid", index);
     return (void *)((char *)array->data.ptr
             + (size_t)index * array->elem_size);
 }
@@ -124,12 +126,12 @@ void const *basic_array_at_c(basic_array const *array, int index)
     BASIC_ASSERT_PTR_NONNULL(array);
     BASIC_ASSERT(basic_array_isinit(array),
             "basic_array object must be initialised");
-    BASIC_ASSERT(valid_index(array, index), "index %d is invalid");
+    BASIC_ASSERT(valid_index(array, index), "index %d is invalid", index);
     return (void const *)((char const *)array->data.ptr
             + (size_t)index * array->elem_size);
 }
 
 int valid_index(basic_array const *array, int index)
 {
-    return (index >= 0) && ((size_t)index < basic_array_cap(array));
+    return (index >= 0) && (index < basic_array_cap(array));
 }
