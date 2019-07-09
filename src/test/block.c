@@ -101,6 +101,8 @@ static void test_block_clone(void **state)
 
     // ...and have equal memory contents as the block argument
     assert_memory_equal(src.ptr, dest.ptr, src.size);
+
+    basic_block_dealloc(&dest);
 }
 
 static void test_block_alloc(void **state)
@@ -127,6 +129,8 @@ static void test_block_alloc(void **state)
     // ...and have zero-initialised memory
     static char const zero[allocation_size] = {0};
     assert_memory_equal(block.ptr, zero, allocation_size);
+
+    basic_block_dealloc(&block);
 }
 
 static void test_block_realloc(void **state)
@@ -198,6 +202,10 @@ static void test_block_realloc(void **state)
     assert_true(basic_block_isinit(&block_to_shrink));
     assert_true(block_to_shrink.size == shrink_size);
     assert_memory_equal(block_to_shrink.ptr, shrink_unchanged, shrink_size);
+
+    basic_block_dealloc(&block_to_shrink);
+    basic_block_dealloc(&block_to_grow);
+    basic_block_dealloc(&null_block);
 }
 
 static void test_block_dealloc(void **state)
