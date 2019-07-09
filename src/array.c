@@ -112,6 +112,8 @@ basic_block basic_array_toblock(basic_array *array)
 void *basic_array_at(basic_array *array, int index)
 {
     BASIC_ASSERT_PTR_NONNULL(array);
+    BASIC_ASSERT(basic_array_isinit(array),
+            "basic_array object must be initialised");
     BASIC_ASSERT(valid_index(array, index), "index %d is invalid");
     return (void *)((char *)array->data.ptr
             + (size_t)index * array->elem_size);
@@ -120,6 +122,8 @@ void *basic_array_at(basic_array *array, int index)
 void const *basic_array_at_c(basic_array const *array, int index)
 {
     BASIC_ASSERT_PTR_NONNULL(array);
+    BASIC_ASSERT(basic_array_isinit(array),
+            "basic_array object must be initialised");
     BASIC_ASSERT(valid_index(array, index), "index %d is invalid");
     return (void const *)((char const *)array->data.ptr
             + (size_t)index * array->elem_size);
@@ -127,5 +131,5 @@ void const *basic_array_at_c(basic_array const *array, int index)
 
 int valid_index(basic_array const *array, int index)
 {
-    return (index > 0) && ((size_t)index < basic_array_cap(array));
+    return (index >= 0) && ((size_t)index < basic_array_cap(array));
 }
