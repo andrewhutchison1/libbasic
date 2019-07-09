@@ -1,7 +1,6 @@
 #include "string_vector.h"
 
 #include <string.h>
-#include <stdio.h> // FIXME
 
 enum {
     grow_factor = 2
