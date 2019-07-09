@@ -108,6 +108,7 @@ static void test_block_clone(void **state)
 static void test_block_alloc(void **state)
 {
     (void) state;
+
     enum {
         allocation_size = 512
     };
