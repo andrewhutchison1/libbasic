@@ -1,3 +1,7 @@
+/**
+ * @file array.h
+ */
+
 #ifndef BASIC_ARRAY_H_
 #define BASIC_ARRAY_H_
 
@@ -6,6 +10,7 @@
 
 #include "assertion.h"
 #include "block.h"
+#include "span.h"
 
 typedef struct {
     basic_block data;
@@ -31,6 +36,8 @@ static inline int basic_array_cap(basic_array const *array);
 
 void *basic_array_at(basic_array *array, int index);
 void const *basic_array_at_c(basic_array const *array, int index);
+
+basic_span basic_array_get(basic_array *array, int index);
 
 int basic_array_cap(basic_array const *array)
 {

@@ -121,6 +121,19 @@ void *basic_array_at(basic_array *array, int index)
             + (size_t)index * array->elem_size);
 }
 
+basic_span basic_array_get(basic_array *array, int index)
+{
+    BASIC_ASSERT_PTR_NONNULL(array);
+    BASIC_ASSERT(basic_array_isinit(array),
+            "basic_array object must be initialised");
+    BASIC_ASSERT(valid_index(array, index), "index %d is invalid", index);
+
+    return (basic_span){
+        .ptr = (void *)((char *)array->data.ptr + index * array->elem_size),
+        .size = array->elem_size
+    };
+}
+
 void const *basic_array_at_c(basic_array const *array, int index)
 {
     BASIC_ASSERT_PTR_NONNULL(array);
