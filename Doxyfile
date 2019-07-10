@@ -2534,3 +2534,7 @@ GENERATE_LEGEND        = YES
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 DOT_CLEANUP            = YES
+
+ALIASES += state_table_begin{1}="<table><caption align=top>States of \1</caption><tr><th>State</th><th>Description</th><th>Query</th></tr>"
+ALIASES += state_table_entry{3}="<tr><td align=center>\c \1</td><td>\2</td><td align=center>\ref \3</td></tr>"
+ALIASES += state_table_end="</table>"

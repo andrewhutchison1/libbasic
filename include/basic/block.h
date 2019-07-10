@@ -14,6 +14,29 @@
  * @struct basic_block
  * @brief Represents a freestore-allocated memory area.
  *
+ * The basic_block structure is a foundational object that models freestore-
+ * allocated memory areas, and can be thought of as a size and pointer pair.
+ * The pointer field always comes from the C allocator, and as such, ownership
+ * semantics apply.
+ * A basic_block has two states, *init* and *null*.
+ *
+ * @state_table_begin{basic_block}
+ *  @state_table_entry{
+ *      null,
+ *      A basic_block morally equivalent to a NULL pointer,
+ *      basic_block_isnull
+ *  }
+ *  @state_table_entry{
+ *      init,
+ *      A basic_block that currently owns a freestore-allocated memory area,
+ *      basic_block_isinit
+ *  }
+ * @state_table_end
+ *
+ * The state transition diagram for basic_block is as follows:
+ *
+ * @dotfile basic_block.dot
+ *
  * @var basic_block::ptr
  * @brief The pointer to the first byte of the memory area.
  *
