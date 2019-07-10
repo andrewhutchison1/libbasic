@@ -419,7 +419,7 @@ INLINE_GROUPED_CLASSES = NO
 # Man pages) or section (for LaTeX and RTF).
 # The default value is: NO.
 
-INLINE_SIMPLE_STRUCTS  = YES
+INLINE_SIMPLE_STRUCTS  = NO
 
 # When TYPEDEF_HIDES_STRUCT tag is enabled, a typedef of a struct, union, or
 # enum is documented as struct, union, or enum with the name of the typedef. So
@@ -592,7 +592,7 @@ INLINE_INFO            = YES
 # name. If set to NO, the members will appear in declaration order.
 # The default value is: YES.
 
-SORT_MEMBER_DOCS       = YES
+SORT_MEMBER_DOCS       = NO
 
 # If the SORT_BRIEF_DOCS tag is set to YES then doxygen will sort the brief
 # descriptions of file, namespace and class members alphabetically by member
@@ -2258,7 +2258,7 @@ HIDE_UNDOC_RELATIONS   = YES
 # set to NO
 # The default value is: NO.
 
-HAVE_DOT               = NO
+HAVE_DOT               = YES
 
 # The DOT_NUM_THREADS specifies the number of dot invocations doxygen is allowed
 # to run in parallel. When set to 0 doxygen will base this on the number of
