@@ -4,7 +4,7 @@ digraph basic_block {
     node [shape=box]; null; init;
     node [shape=point]; NONE;
 
-    NONE->init [label="basic_block_alloc"];
-    init->null [label="basic_block_dealloc"];
-    init->init [label="basic_block_realloc"];
+    NONE->init [label="basic_block_alloc" href="\ref basic_block_alloc"];
+    init->null [label="basic_block_dealloc" href="\ref basic_block_dealloc"];
+    init->init [label="basic_block_realloc" href="\ref basic_block_realloc"];
 }
