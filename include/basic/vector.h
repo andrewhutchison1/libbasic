@@ -1,3 +1,7 @@
+/**
+ * @file vector.h
+ */
+
 #ifndef BASIC_VECTOR_H_
 #define BASIC_VECTOR_H_
 
@@ -5,6 +9,7 @@
 
 #include "assertion.h"
 #include "array.h"
+#include "span.h"
 
 typedef struct {
     basic_array data;
@@ -34,6 +39,8 @@ static inline void basic_vector_removeback(basic_vector *vector);
 
 void *basic_vector_at(basic_vector *vector, int index);
 void const *basic_vector_at_c(basic_vector const *vector, int index);
+
+basic_span basic_vector_get(basic_vector *vector, int index);
 
 static inline void *basic_vector_front(basic_vector *vector);
 static inline void const *basic_vector_front_c(basic_vector const *vector);

@@ -157,6 +157,19 @@ void const *basic_vector_at_c(basic_vector const *vector, int index)
     return basic_array_at_c(&vector->data, index);
 }
 
+basic_span basic_vector_get(basic_vector *vector, int index)
+{
+    BASIC_ASSERT_PTR_NONNULL(vector);
+    BASIC_ASSERT(basic_vector_isinit(vector),
+            "basic_vector object must be initialised");
+    BASIC_ASSERT_POSITIVE(index);
+    BASIC_ASSERT(index < vector->elem_count,
+            "index %d out of range",
+            index);
+
+    return basic_array_get(&vector->data, index);
+}
+
 bool vector_isfull(basic_vector const *vector)
 {
     return vector->elem_count == vector->elem_cap;
