@@ -146,21 +146,14 @@ static void test_block_realloc(void **state)
     // Passing NULL as the basic_block pointer should assert
     expect_assert_failure(basic_block_realloc(NULL, 1));
 
-    // Passing a non-null and non-initialised block object should assert
+    // Passing a non-initialised block object should assert
     expect_assert_failure(basic_block_realloc(&block_bad_size, 1));
     expect_assert_failure(basic_block_realloc(&block_bad_ptr, 1));
+    expect_assert_failure(basic_block_realloc(&BASIC_BLOCK_NULL, 1));
 
     // Passing 0 as the size should assert
     basic_block block = block_good;
     expect_assert_failure(basic_block_realloc(&block, 0));
-
-    // Passing a null block should defer to basic_block_alloc, we check
-    // here that the block (after reallocation) is initialised, and has
-    // the appropriate size
-    basic_block null_block = BASIC_BLOCK_NULL;
-    assert_non_null(basic_block_realloc(&null_block, allocation_size));
-    assert_true(basic_block_isinit(&null_block));
-    assert_true(null_block.size == allocation_size);
 
     // Allocate a block for testing
     basic_block block_to_grow = basic_block_alloc(allocation_size);
@@ -206,7 +199,6 @@ static void test_block_realloc(void **state)
 
     basic_block_dealloc(&block_to_shrink);
     basic_block_dealloc(&block_to_grow);
-    basic_block_dealloc(&null_block);
 }
 
 static void test_block_dealloc(void **state)

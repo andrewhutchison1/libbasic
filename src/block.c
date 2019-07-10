@@ -53,13 +53,8 @@ basic_block *basic_block_realloc(basic_block *block, size_t size)
 {
     BASIC_ASSERT_PTR_NONNULL(block);
     BASIC_ASSERT_NONZERO(size);
-    BASIC_ASSERT(basic_block_isnull(block) || basic_block_isinit(block),
-            "basic_object object must be null or initialised");
-
-    if (basic_block_isnull(block)) {
-        *block = basic_block_alloc(size);
-        return block;
-    }
+    BASIC_ASSERT(basic_block_isinit(block),
+            "basic_block object must be initialised");
 
     void *ptr = realloc(block->ptr, size);
     if (!ptr) {
