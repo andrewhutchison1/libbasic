@@ -1,0 +1,10 @@
+digraph basic_block {
+    rankdir=LR;
+
+    node [shape=box]; null; init;
+    node [shape=point]; NONE;
+
+    NONE->init [label="basic_block_alloc"];
+    init->null [label="basic_block_dealloc"];
+    init->init [label="basic_block_realloc"];
+}
